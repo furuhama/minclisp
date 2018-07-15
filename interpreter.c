@@ -1,25 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-/* Declare a buffer for user input of size 2048 */
-static char input[2048];
+#include <editline/readline.h>
 
 int main(int argc, char** argv) {
 
-  /* Print Version and Exit Information */
   puts("MinCLisp Version 0.0.0.0.1");
   puts("Press Ctrl+c to Exit\n");
 
-  /* In a never ending loop */
   while (1) {
+    char* input = readline("mincl> ");
 
-    /* Output our prompt */
-    fputs("mincl> ", stdout);
+    add_history(input);
 
-    /* Read a line of user input of maximum size 2048 */
-    fgets(input, 2048, stdin);
+    printf("Echo: %s\n", input);
 
-    /* Echo input back to user */
-    printf("Echo: %s", input);
+    free(input);
   }
 
   return 0;
